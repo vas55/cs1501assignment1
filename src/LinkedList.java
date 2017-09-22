@@ -1,7 +1,7 @@
 
 public class LinkedList {
 	
-	Node root; 
+	Node root = null; 
 	
 	public void add (String s) {
 		//base case where I just put the first word into the dlb straight in 
@@ -24,15 +24,6 @@ public class LinkedList {
 		}
 	}
 	
-	//if down node does not exist then create down node and then add value
-	public void addToDownNode(char value){
-		
-	}
-	
-	//if next node does not exist then create next node and then add value
-	public boolean addToNextNode (Node n, char value) {
-		if ()
-	}
 	//this function will add a word into the DLB 
 	private void addAnyOtherWord (char[] chars, Node root) {
 		//start at root
