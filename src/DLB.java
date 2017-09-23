@@ -10,17 +10,17 @@ public class DLB {
 
 		// create dictionary DLB and user DLB
 		System.out.println("Started scanning dictionary file");
-		Scanner dictionary = new Scanner(new File("sample.txt"));
+		Scanner dictionary = new Scanner(new File("dictionary.txt"));
 		String firstWord = dictionary.nextLine();
 		System.out.println("Enter first word: " + firstWord);
-		dictLL.addFirstWord(firstWord);
+		dictLL.addFirstWord(firstWord.toLowerCase());
 		System.out.println("entered first word");
 		while (dictionary.hasNext()){
 			String dictionaryWord = dictionary.nextLine();
 			System.out.println("Adding next word...");
 			System.out.println("Word being input...: " + dictionaryWord);
 			
-			dictLL.add(dictionaryWord);
+			dictLL.add(dictionaryWord.toLowerCase());
 			System.out.println("Inputting dictionary.txt file into DLB...");
 		}
 		

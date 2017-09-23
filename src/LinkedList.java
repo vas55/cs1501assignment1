@@ -76,6 +76,7 @@ public class LinkedList {
 					//i--;
 				}
 				if (current.down != null) {
+					System.out.println("They equal each other and move down");
 					current = current.down;
 				}
 			}
