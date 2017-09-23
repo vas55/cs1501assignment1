@@ -8,6 +8,9 @@ public class Node {
 		this.data = d;
 	}
 	
+	public Node() {
+	}
+	
 	//make next node
 	public void makeNextNode(Node n){
 		this.next = n;

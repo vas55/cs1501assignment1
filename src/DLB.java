@@ -9,22 +9,31 @@ public class DLB {
 		LinkedList dictLL = new LinkedList();
 
 		// create dictionary DLB and user DLB
-		System.out.println("Started inputting dictionary file into DLB");
+		System.out.println("Started scanning dictionary file");
 		Scanner dictionary = new Scanner(new File("dictionary.txt"));
+		String firstWord = dictionary.nextLine();
+		System.out.println("Enter first word: " + firstWord);
+		dictLL.addFirstWord(firstWord);
+		System.out.println("entered first word");
 		while (dictionary.hasNext()){
 			String dictionaryWord = dictionary.nextLine();
+			System.out.println("Before add function...");
+			System.out.println("Word being input...: " + dictionaryWord);
+			
 			dictLL.add(dictionaryWord);
 			System.out.println("Inputting dictionary.txt file into DLB...");
 		}
+		
+		dictionary.close();
 		System.out.println("Done inputting!");
 		
 		
 		// create DLB for dictionary
-		Scanner userWord = new Scanner(new File("user_history.txt"));
-		while (userWord.hasNext()) {
-			String line = userWord.nextLine();
+		Scanner userHistory = new Scanner(new File("user_history.txt"));
+		while (userHistory.hasNext()) {
+			String userWord = userHistory.nextLine();
 		}
-		
+		userHistory.close();
 		
 		
 		//create DLB for user

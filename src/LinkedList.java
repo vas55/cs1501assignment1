@@ -1,13 +1,34 @@
 
 public class LinkedList {
 	
-	Node root = null; 
+	Node root; 
 	
+	//constructor
+	//create null root ?
+	public LinkedList() {
+		root = new Node(); 
+	}
+	
+	public void addFirstWord(String s) {
+		char[] wordArray = s.toCharArray();
+		System.out.println("In base case...");
+		//puts first letter of FIRST WORD into the array
+		root = new Node(wordArray[0]);
+		Node curr = root; 
+		//build the word all the way down because if node is null then nothing is below it
+		for (int i = 1; i < wordArray.length; i++) {
+			Node d = new Node (wordArray[i]);
+			curr.makeDownNode(d);
+			curr = curr.down;
+		}
+		
+	}
 	public void add (String s) {
 		//base case where I just put the first word into the dlb straight in 
 		// if root is null
 		char[] wordArray = s.toCharArray();
 		if (root == null) {
+			System.out.println("In base case...");
 			//puts first letter of FIRST WORD into the array
 			root = new Node(wordArray[0]);
 			Node curr = root; 
@@ -28,7 +49,7 @@ public class LinkedList {
 	private void addAnyOtherWord (char[] chars, Node root) {
 		//start at root
 		Node current = root;
-
+		System.out.println("In LinkedList addanyotherword...");
 		for (int i = 0; i<chars.length; i++) {
 			
 			//if value of data is the same as value in character
