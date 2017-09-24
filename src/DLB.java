@@ -34,7 +34,16 @@ public class DLB {
 		}
 		userHistory.close();
 		
-		
+		Scanner sc = new Scanner(System.in);
+		String userInput = sc.next().toLowerCase();
+
+		char[] w = new char[100];
+		int index = 0;
+		Node n = dictLL.reachLastNodeInPrefix(userInput);
+		//using one down node from prefix
+		//need to keep track of WordLIst index 
+		int openIndex = 0;
+		dictLL.search(userInput, n, w, index, openIndex);
 		
 		
 		//create DLB for user

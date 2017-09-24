@@ -50,7 +50,7 @@ public class LinkedList {
 		//System.out.println("current Node value: " + current);
 		//System.out.println("Next node value: " + current.next);
 		//System.out.println("Down node value: " + current.down);
-		//System.out.println("Root node value: " + root);
+		//System.out.println("Root node value: " + root.data);
 		
 		for (int i = 0; i<chars.length; i++) {
 			//System.out.println("NEXT LETTER IN WORD");
@@ -125,12 +125,15 @@ public class LinkedList {
 	//capable of storing 5 words
 
 	String[] WL = new String[5];
-	public String search(String word, Node n, char[] w, int index) {
+
+	public void search(String word, Node n, char[] w, int index, int openIndex) {
 		// does it have a carrot? AND the string of characters in the char array is not in my large Word array?
 		// then output the word
 		String testWord = new String(w);
+		//using down node from current
+		System.out.println("Node we're currently at in search function: " + n.data);
+	
 		// need to start looking for words by making sure we're at the last node of the prefix
-		n = reachLastNodeInPrefix(word);
 		//is this correct?!!?
 		//you want to pass the down node into carrot to see if it has a carrot. It will then check 
 		// other sibling nodes if there is a carrot
@@ -140,23 +143,59 @@ public class LinkedList {
 		// -- this may mean that we fall backwards in a previous recursive step
 		if (hasCarrot(n.down) && ( testWord == WL[index])) {
 			w[index] = n.data;
-			return new String(w);
+			WL[openIndex] = new String(w);
 		}
 
+		//if the node is not null && next isn't null OR the node itself isn't a carrot
 		if ((n.down !=null) && ((n.down.getData() != '^') || (n.down.next != null))) {
 			char[] newArray = Arrays.copyOf(w, index);
 			newArray[index] = n.data;
 			index++;
-			return search(word,n.down,newArray,index);
+			search(word,n,newArray,index, openIndex);
 		}
+		// if the next one is not null then go to the next one
 		if (n.next != null) {
-			return search(word,n.next,w,index);
+			search(word,n.next,w,index, openIndex);
 		}
-		//if nothing pans out then return null
-		return null;
 	}
-	private Node reachLastNodeInPrefix (String s) {
-		Node current = new Node(); 
+	
+	public Node reachLastNodeInPrefix (String s) {
+		char[] prefix = s.toCharArray();
+		Node current = root;
+		System.out.println("Root value: " + current.data);
+		for (int i = 0; i<prefix.length; i++) {
+			System.out.println("Comparing current.data: "+ current.data + " to prefix["+ i + "]: " + prefix[i]);
+			
+			if (current.data == prefix[i]) {
+				//move down to see if it continues to be a prefix
+				if (i == prefix.length-1){
+					return current;
+				}
+				else {
+					System.out.println("They equal!");
+					System.out.println("Moving down...");
+					current = current.down;
+				}
+				//else{
+				//	return current;
+				//}
+				System.out.println("Current node value: " + current.data);
+			}
+			else if (current.down == null) {
+				// down is null, meaning not a prefix
+				break;
+			}
+			else if ((current.data != prefix[i]) && (current.next != null)) {
+				System.out.println("Not equal to each other");
+				System.out.println("Current node value: " + current.data);
+				System.out.println("Moving next...");
+				current = current.next;
+				i--;
+				System.out.println("Current node value: " + current.data);
+	
+			}
+		}
+		 
 		return current;
 	}
 	
