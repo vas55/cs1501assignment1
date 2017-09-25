@@ -69,10 +69,11 @@ public class ac_test {
 			Node n = dictLL.reachLastNodeInPrefix(userInput);
 			//using one down node from prefix
 			//need to keep track of WordLIst index 
+			//if no suggestions
 			if (n == null) {
-				//System.out.println("No suggestions");
-				//add to user history directly
-				//done above
+				System.out.println("No suggestions");
+				enterPrefixIntoUserApproach(userInput);
+				
 			}else {
 				dictLL.search(userInput, n.down, w, index);
 			}
