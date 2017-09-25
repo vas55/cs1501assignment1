@@ -1,7 +1,7 @@
 import java.util.*;
 import java.io.*;
 
-public class DLB {
+public class ac_test {
 	
 	public static void main(String[] args) throws IOException {
 		long sumOfTime = 0; 
