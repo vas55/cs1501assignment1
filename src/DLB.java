@@ -28,27 +28,36 @@ public class DLB {
 		
 		dictionary.close();
 		System.out.println("Done inputting dictionary!");
-				
+		
+		System.out.println("Enter your character: ");
+		Scanner sc = new Scanner(System.in);
+		String userInput = sc.nextLine().toLowerCase();
+		
 		// create DLB for user_history
+		System.out.println("Printing user_history file if prefix matches...");
 		Scanner userHistory = new Scanner(new File("user_history.txt"));
 		while (userHistory.hasNext()) {
 			String userWord = userHistory.nextLine();
 			userDLB.add(userWord.toLowerCase());
+			if (userWord.startsWith(userInput)) {
+				System.out.println(userWord);
+			}
 		}
 		userHistory.close();
 		System.out.println("Done inputting user_history!");
 
-		System.out.println("Enter your character: ");
-		Scanner sc = new Scanner(System.in);
-		String userInput = sc.nextLine().toLowerCase();
+		
+		//System.out.println("Enter your character: ");
+		//Scanner sc = new Scanner(System.in);
+		//String userInput = sc.nextLine().toLowerCase();
 		// user will input by one character, so we will enter the user input into an array and convert to a full string when searching
 		// DO THIS
 		
 		//System.out.println("userInput=" + userInput);
-		if (userInput.equals("$")) {
+		if (userInput.contains("$")) {
 			System.out.println("End of word");
 		}
-		else if (userInput.equals("!")){
+		else if (userInput.contains("!")){
 			System.out.println("End of program. Bye");
 		}
 		else {

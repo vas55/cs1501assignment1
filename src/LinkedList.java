@@ -179,7 +179,7 @@ public class LinkedList {
 				
 		//if the node is not null && next isn't null OR the node itself isn't a carrot
 		if ((n.down !=null) && ((n.down.getData() != '^') || (n.down.next != null))) {
-			char[] newArray = w.clone();
+			char[] newArray = (char[]) w.clone();
 			//System.out.println("cloning array...");
 			newArray[index] = n.data;
 			//System.out.println("newArray[index]: " + newArray[index]);
