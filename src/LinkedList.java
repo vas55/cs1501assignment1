@@ -125,6 +125,18 @@ public class LinkedList {
 	//capable of storing more than 5 words because there's a chance the word matches the user input so we need to move on to the next name
 	String[] WL = new String[100];
 	int openIndex = 0;
+	
+	public String returnSuggestions() {
+		String wordList = Arrays.toString(WL);
+		wordList = wordList.replaceAll("\0", "");
+		System.out.println("wordList: " + wordList);
+		return wordList;
+	}
+	
+	public String[] returnWordList() {
+		return WL;
+	}
+	
 	public void search(String word, Node n, char[] w, int index) {
 		// does it have a carrot? AND the string of characters in the char array is not in my large Word array?
 		// then output the word
@@ -152,8 +164,15 @@ public class LinkedList {
 		
 		if (n.data != '^' && hasCarrot(n.down) && checkWordList(WL, openIndex, w)) {
 			System.out.println("Has carrot and adding to word list");
+			System.out.println("Before inputting data into w array");
+			System.out.println("w[index]: " + w[index]);
+			System.out.println("n.data: " + n.data);
 			w[index] = n.data;
+			System.out.println("After inputting data into w array");
+			System.out.println("w[index]: " + w[index]);
+			System.out.println("n.data: " + n.data);
 			WL[openIndex] = new String(w);
+			System.out.println("WL[openIndex]: " + WL[openIndex]);
 			openIndex++;
 		}
 
@@ -163,6 +182,8 @@ public class LinkedList {
 			char[] newArray = w.clone();
 			System.out.println("cloning array...");
 			newArray[index] = n.data;
+			System.out.println("newArray[index]: " + newArray[index]);
+			System.out.println("n.data: " + n.data);
 			index++;
 			System.out.println("Moving down...");
 			search(word,n.down,newArray,index);
@@ -238,13 +259,17 @@ public class LinkedList {
 	
 	//does the node 
 	private boolean hasCarrot(Node curr) {
+		System.out.println("In hasCarrot...");
 		if (curr.data == '^') {
+			System.out.println("In carrot, return true");
 			return true;
 		}
 		else if (curr.next != null) {
+			System.out.println("In hasCarrot but looking next nodes to see if there is carrot");
 			return hasCarrot(curr.next);
 		}
 		else {
+			System.out.println("returns false");
 			return false;
 		}
 	}

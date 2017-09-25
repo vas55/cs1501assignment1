@@ -34,10 +34,11 @@ public class DLB {
 		}
 		userHistory.close();
 		
+		System.out.println("Enter your character: ");
 		Scanner sc = new Scanner(System.in);
 		String userInput = sc.next().toLowerCase();
 		// user will input by one character, so we will enter the user input into an array and convert to a full string when searching
-		//DO THIS
+		// DO THIS
 		char[] w = new char[100];
 		int index = 0;
 		Node n = dictLL.reachLastNodeInPrefix(userInput);
@@ -52,6 +53,22 @@ public class DLB {
 			dictLL.search(userInput, n.down, w, index);
 		}
 		
+		String postfix = dictLL.returnSuggestions();
+		//System.out.println(userInput + postfix);
+		
+		String[] wordList = dictLL.returnWordList();
+		for (int i=0; i<wordList.length; i++) {
+			try {
+				if (wordList[i] == null) {
+					break;
+				}
+				else {
+					System.out.println(userInput + wordList[i].replaceAll("\0", ""));
+				}
+			}catch (NullPointerException e) {
+				System.out.println("");
+			}
+		}
 		
 		//create DLB for user
 		//userDLB();
