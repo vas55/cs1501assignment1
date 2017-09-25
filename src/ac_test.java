@@ -17,9 +17,9 @@ public class ac_test {
 		  
 		//Create the file
 		if (file.createNewFile()){
-			System.out.println("File is created!");
+			System.out.println("User History file is created!");
 		}else{
-			System.out.println("File already exists.");
+			System.out.println("User history file already exists.");
 		}
 		
 		// create dictionary DLB and user DLB
@@ -47,6 +47,8 @@ public class ac_test {
 		// create DLB for user_history
 		//System.out.println("Printing user_history file if prefix matches...");
 		Scanner userHistory = new Scanner(new File("user_history.txt"));
+		System.out.println("Printing out user_history suggestions...");
+
 		while (userHistory.hasNext()) {
 			String userWord = userHistory.nextLine();
 			userDLB.add(userWord.toLowerCase());
@@ -57,7 +59,7 @@ public class ac_test {
 			userInput = userInput + "$";
 		}
 		userHistory.close();
-		System.out.println("Done inputting user_history!");
+		//System.out.println("Done inputting user_history!");
 
 		
 		//System.out.println("Enter your character: ");
@@ -69,8 +71,8 @@ public class ac_test {
 		//System.out.println("userInput=" + userInput);
 		if (userInput.contains("$")) {
 			//System.out.println("End of word");
-			System.out.println("Enters here...");
-			System.out.println("userInput = " + userInput);
+			//System.out.println("Enters here...");
+			//System.out.println("userInput = " + userInput);
 			enterPrefixIntoUserApproach(userInput);
 			userInput = userInput.replace("$", "");
 
@@ -88,14 +90,14 @@ public class ac_test {
 			//using one down node from prefix
 			//need to keep track of WordLIst index 
 			if (n == null) {
-				System.out.println("No suggestions");
+				System.out.println("No dictionary suggestions");
 				enterPrefixIntoUserApproach(userInput);
 				
 			}
 			else {
 				dictLL.search(userInput, n.down, w, index);
 			}
-	
+			System.out.println("Printing out dictionary suggestions...");
 			int count = 0;
 			String[] wordList = dictLL.returnWordList();
 			for (int i=0; i<wordList.length; i++) {
@@ -130,13 +132,13 @@ public class ac_test {
 	public static void enterPrefixIntoUserApproach(String word) throws IOException{
 		//the word will have a $ at the end because that's the last input
 		word = word.replace("$", "");
-		System.out.println("Entering prefix user approach...");
+		//System.out.println("Entering prefix user approach...");
 		fw = new FileWriter("user_history.txt", true);
 		bw = new BufferedWriter(fw);
 	
 				bw.write(word);
 				bw.newLine();
-				System.out.println("Entered letter into user history");
+				//System.out.println("Entered letter into user history");
 				bw.close();
 			
 		
