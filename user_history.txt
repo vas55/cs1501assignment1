@@ -2,5 +2,3 @@ b
 bends
 band
 ba
-ba
-ba

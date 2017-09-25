@@ -115,10 +115,20 @@ public class DLB {
 		
 		fw = new FileWriter("user_history.txt", true);
 		bw = new BufferedWriter(fw);
-		bw.write(word);
-		bw.newLine();
-		System.out.println("Entered letter into user history");
-		bw.close();
+		Scanner scUser = new Scanner("user_history.txt");
+		while (scUser.hasNextLine()) {
+			String line = scUser.nextLine();
+			if (line == word) {
+				System.out.println("Word already exists in user_history.txt");
+			}
+			else {
+				bw.write(word);
+				bw.newLine();
+				System.out.println("Entered letter into user history");
+				bw.close();
+			}
+		}
+		scUser.close();
 	}
 	
 	public static void userInput () throws IOException {
