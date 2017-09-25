@@ -13,6 +13,14 @@ public class ac_test {
 		LinkedList userDLB = new LinkedList();
 		char[] w = new char[100];
 		int index = 0;
+		File file = new File("user_history.txt");
+		  
+		//Create the file
+		if (file.createNewFile()){
+			System.out.println("File is created!");
+		}else{
+			System.out.println("File already exists.");
+		}
 		
 		// create dictionary DLB and user DLB
 		System.out.println("Started scanning dictionary file");
