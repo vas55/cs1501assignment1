@@ -102,15 +102,16 @@ public class ac_test {
 			Node n = dictLL.reachLastNodeInPrefix(userInput);
 			//using one down node from prefix
 			//need to keep track of WordLIst index 
+			System.out.println("Printing out dictionary suggestions...");
+
 			if (n == null) {
 				System.out.println("No dictionary suggestions");
-				enterPrefixIntoUserApproach(userInput);
+				//enterPrefixIntoUserApproach(userInput);
 				
 			}
 			else {
 				dictLL.search(userInput, n.down, w, index);
 			}
-			System.out.println("Printing out dictionary suggestions...");
 			int count = 0;
 			String[] wordList = dictLL.returnWordList();
 			for (int i=0; i<wordList.length; i++) {
