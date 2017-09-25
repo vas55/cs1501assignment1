@@ -36,14 +36,21 @@ public class DLB {
 		
 		Scanner sc = new Scanner(System.in);
 		String userInput = sc.next().toLowerCase();
-
+		// user will input by one character, so we will enter the user input into an array and convert to a full string when searching
+		//DO THIS
 		char[] w = new char[100];
 		int index = 0;
 		Node n = dictLL.reachLastNodeInPrefix(userInput);
 		//using one down node from prefix
 		//need to keep track of WordLIst index 
 		int openIndex = 0;
-		dictLL.search(userInput, n, w, index, openIndex);
+		if (n == null) {
+			System.out.println("No suggestions");
+			//add to user history directly
+			//DO THIS STILL
+		}else {
+			dictLL.search(userInput, n.down, w, index);
+		}
 		
 		
 		//create DLB for user
