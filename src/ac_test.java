@@ -50,10 +50,11 @@ public class ac_test {
 		while (userHistory.hasNext()) {
 			String userWord = userHistory.nextLine();
 			userDLB.add(userWord.toLowerCase());
-			String userInputWithoutMoney = userInput.replace("$", "");
-			if (userWord.startsWith(userInputWithoutMoney)) {
+			userInput = userInput.replace("$", "");
+			if (userWord.startsWith(userInput)) {
 				System.out.println(userWord);
 			}
+			userInput = userInput + "$";
 		}
 		userHistory.close();
 		System.out.println("Done inputting user_history!");
@@ -67,16 +68,22 @@ public class ac_test {
 		
 		//System.out.println("userInput=" + userInput);
 		if (userInput.contains("$")) {
-			System.out.println("End of word");
+			//System.out.println("End of word");
+			System.out.println("Enters here...");
 			System.out.println("userInput = " + userInput);
 			enterPrefixIntoUserApproach(userInput);
-			
+			userInput = userInput.replace("$", "");
+
 		}
 		
-		else if (userInput.contains("!")){
+		if (userInput.contains("!")){
 			System.out.println("End of program. Bye");
 		}
 		else {
+			//System.out.println("Enters here...");
+			if (userInput.contains("$")) {
+				userInput.replaceAll("$", "");
+			}
 			Node n = dictLL.reachLastNodeInPrefix(userInput);
 			//using one down node from prefix
 			//need to keep track of WordLIst index 
@@ -84,7 +91,8 @@ public class ac_test {
 				System.out.println("No suggestions");
 				enterPrefixIntoUserApproach(userInput);
 				
-			}else {
+			}
+			else {
 				dictLL.search(userInput, n.down, w, index);
 			}
 	
@@ -122,7 +130,7 @@ public class ac_test {
 	public static void enterPrefixIntoUserApproach(String word) throws IOException{
 		//the word will have a $ at the end because that's the last input
 		word = word.replace("$", "");
-
+		System.out.println("Entering prefix user approach...");
 		fw = new FileWriter("user_history.txt", true);
 		bw = new BufferedWriter(fw);
 	
