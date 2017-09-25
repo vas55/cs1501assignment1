@@ -55,9 +55,13 @@ public class DLB {
 		
 		//System.out.println("userInput=" + userInput);
 		if (userInput.contains("$")) {
+			userInput = userInput.replace("$", "");
 			System.out.println("End of word");
+			enterPrefixIntoUserApproach(userInput);
+			
 		}
-		else if (userInput.contains("!")){
+		
+		if (userInput.contains("!")){
 			System.out.println("End of program. Bye");
 		}
 		else {
@@ -75,7 +79,7 @@ public class DLB {
 			int count = 0;
 			String[] wordList = dictLL.returnWordList();
 			for (int i=0; i<wordList.length; i++) {
-				
+				//only 5 suggestions from the dictionary
 				if (count < 5){
 					try {
 						if (wordList[i] == null) {
@@ -102,6 +106,19 @@ public class DLB {
 		//dictionaryDLB();
 		//userInput();
 	} // end main
+	
+	public static void enterPrefixIntoUserApproach(String word) throws IOException{
+		//the word will have a $ at the end because that's the last input
+		FileWriter fw = null;
+		BufferedWriter bw = null;
+		
+		fw = new FileWriter("user_history.txt", true);
+		bw = new BufferedWriter(fw);
+		bw.write(word);
+		bw.newLine();
+		System.out.println("Entered letter into user history");
+		bw.close();
+	}
 	
 	public static void userInput () throws IOException {
 		Scanner sc = new Scanner(System.in);
