@@ -17,13 +17,13 @@ public class ac_test {
 		  
 		//Create the file
 		if (file.createNewFile()){
-			System.out.println("User History file is created!");
+			//System.out.println("User History file is created!");
 		}else{
-			System.out.println("User history file already exists.");
+			//System.out.println("User history file already exists.");
 		}
 		
 		// create dictionary DLB and user DLB
-		System.out.println("Started scanning dictionary file");
+		//System.out.println("Started scanning dictionary file");
 		Scanner dictionary = new Scanner(new File("dictionary.txt"));
 		String firstWord = dictionary.nextLine();
 		//System.out.println("Enter first word: " + firstWord);
@@ -38,7 +38,7 @@ public class ac_test {
 		}
 		
 		dictionary.close();
-		System.out.println("Done inputting dictionary!");
+		//System.out.println("Done inputting dictionary!");
 		
 		System.out.println("Enter your character: ");
 		Scanner sc = new Scanner(System.in);
@@ -70,11 +70,18 @@ public class ac_test {
 		
 		//System.out.println("userInput=" + userInput);
 		if (userInput.contains("$")) {
+			if (userInput.contains("!")){
+				System.out.println("End of program");
+				System.exit(0);
+			}
+			else {
+				enterPrefixIntoUserApproach(userInput);
+				userInput = userInput.replace("$", "");
+			}
 			//System.out.println("End of word");
 			//System.out.println("Enters here...");
 			//System.out.println("userInput = " + userInput);
-			enterPrefixIntoUserApproach(userInput);
-			userInput = userInput.replace("$", "");
+			
 
 		}
 		
