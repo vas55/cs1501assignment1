@@ -8,7 +8,9 @@ public class ac_test {
 	
 	public static void main(String[] args) throws IOException {
 		long sumOfTime = 0; 
-		String nextLetter = "";
+		long startTime = 0; 
+		long estimatedTime = 0; 
+		//String nextLetter = "";
 		LinkedList dictLL = new LinkedList();
 		LinkedList userDLB = new LinkedList();
 		char[] w = new char[100];
@@ -48,7 +50,7 @@ public class ac_test {
 		//System.out.println("Printing user_history file if prefix matches...");
 		Scanner userHistory = new Scanner(new File("user_history.txt"));
 		System.out.println("Printing out user_history suggestions...");
-
+		startTime = System.nanoTime();
 		while (userHistory.hasNext()) {
 			String userWord = userHistory.nextLine();
 			userDLB.add(userWord.toLowerCase());
@@ -71,6 +73,10 @@ public class ac_test {
 		//System.out.println("userInput=" + userInput);
 		if (userInput.contains("$")) {
 			if (userInput.contains("!")){
+				estimatedTime = System.nanoTime() - startTime;
+				double estimatedTimeInSeconds = estimatedTime/(Math.pow(10, 9));
+				
+				System.out.println("Average time: (" + estimatedTimeInSeconds + " s)" );
 				System.out.println("End of program");
 				System.exit(0);
 			}
@@ -129,6 +135,9 @@ public class ac_test {
 				}
 			} // end for loop
 		} // end else 
+		estimatedTime = System.nanoTime() - startTime;
+		double estimatedTimeInSeconds = estimatedTime/(Math.pow(10, 9));
+		System.out.println("(" + estimatedTimeInSeconds + " s)");
 		System.out.println("Done running...");
 		//create DLB for user
 		//userDLB();
