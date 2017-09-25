@@ -126,13 +126,6 @@ public class LinkedList {
 	String[] WL = new String[100];
 	int openIndex = 0;
 	
-	public String returnSuggestions() {
-		String wordList = Arrays.toString(WL);
-		wordList = wordList.replaceAll("\0", "");
-		System.out.println("wordList: " + wordList);
-		return wordList;
-	}
-	
 	public String[] returnWordList() {
 		return WL;
 	}
@@ -143,9 +136,9 @@ public class LinkedList {
 		String charArrayToString = new String(w);
 		charArrayToString = charArrayToString.replaceAll("\0", "");
 		//using down node from current
-		System.out.println("Index = " + index);
-		System.out.println("OpenIndex: " + openIndex);
-		System.out.println("Found last node value is: " + n.data);
+		//System.out.println("Index = " + index);
+		//System.out.println("OpenIndex: " + openIndex);
+		//System.out.println("Found last node value is: " + n.data);
 		// need to start looking for words by making sure we're at the last node of the prefix
 		// is this correct?!!?
 		// you want to pass the down node into carrot to see if it has a carrot. It will then check 
@@ -155,24 +148,24 @@ public class LinkedList {
 		// secondary check -- if it is already in word list array then move on to other words
 		// -- this may mean that we fall backwards in a previous recursive step
 		
-		System.out.println("charArrayToString: " + charArrayToString);
+		//System.out.println("charArrayToString: " + charArrayToString);
 		for (int i = 0; i<openIndex; i++) {	
 			String wordList = new String(WL[i]).replaceAll("\0", "");
-			System.out.println("WL[openIndex]: " + wordList + " at openIndex: " + i);
+			//System.out.println("WL[openIndex]: " + wordList + " at openIndex: " + i);
 		}
-		System.out.println("---------------------------------------------------");
+		//System.out.println("---------------------------------------------------");
 		
 		if (n.data != '^' && hasCarrot(n.down) && checkWordList(WL, openIndex, w)) {
-			System.out.println("Has carrot and adding to word list");
-			System.out.println("Before inputting data into w array");
-			System.out.println("w[index]: " + w[index]);
-			System.out.println("n.data: " + n.data);
+			//System.out.println("Has carrot and adding to word list");
+			//System.out.println("Before inputting data into w array");
+			//System.out.println("w[index]: " + w[index]);
+			//System.out.println("n.data: " + n.data);
 			w[index] = n.data;
-			System.out.println("After inputting data into w array");
-			System.out.println("w[index]: " + w[index]);
-			System.out.println("n.data: " + n.data);
+			//System.out.println("After inputting data into w array");
+			//System.out.println("w[index]: " + w[index]);
+			//System.out.println("n.data: " + n.data);
 			WL[openIndex] = new String(w);
-			System.out.println("WL[openIndex]: " + WL[openIndex]);
+			//System.out.println("WL[openIndex]: " + WL[openIndex]);
 			openIndex++;
 		}
 
@@ -180,17 +173,17 @@ public class LinkedList {
 		//if the node is not null && next isn't null OR the node itself isn't a carrot
 		if ((n.down !=null) && ((n.down.getData() != '^') || (n.down.next != null))) {
 			char[] newArray = w.clone();
-			System.out.println("cloning array...");
+			//System.out.println("cloning array...");
 			newArray[index] = n.data;
-			System.out.println("newArray[index]: " + newArray[index]);
-			System.out.println("n.data: " + n.data);
+			//System.out.println("newArray[index]: " + newArray[index]);
+			//System.out.println("n.data: " + n.data);
 			index++;
-			System.out.println("Moving down...");
+			//System.out.println("Moving down...");
 			search(word,n.down,newArray,index);
 		}
 		// if the next one is not null then go to the next one
 		if (n.next != null) {
-			System.out.println("Moving next...");
+			//System.out.println("Moving next...");
 			search(word,n.next,w,index);
 		}
 		
@@ -198,7 +191,7 @@ public class LinkedList {
 	public boolean checkWordList (String[] wordList, int openIndex, char[] charArray) {
 		String word = new String(charArray);
 		word = word.replace("\0", "");
-		System.out.println("wordCheck: " + word);
+		//System.out.println("wordCheck: " + word);
 		for (int i = 0; i < openIndex; i++) {
 			if (word == wordList[i]) {
 				return false;
@@ -211,45 +204,45 @@ public class LinkedList {
 		char[] prefix = s.toCharArray();
 		Node current = root;
 	
-		System.out.println("Root value: " + current.data);
+		//System.out.println("Root value: " + current.data);
 		for (int i = 0; i<prefix.length; i++) {
-			System.out.println("Comparing current.data: "+ current.data + " to prefix["+ i + "]: " + prefix[i]);
-			System.out.println(current.data == prefix[i]);
+			//System.out.println("Comparing current.data: "+ current.data + " to prefix["+ i + "]: " + prefix[i]);
+			//System.out.println(current.data == prefix[i]);
 			if (current.data == prefix[i]) {
 				//move down to see if it continues to be a prefix
 				if (i == prefix.length-1){
 					return current;
 				}
 				else {
-					System.out.println("They equal!");
-					System.out.println("Moving down...");
+					//System.out.println("They equal!");
+					//System.out.println("Moving down...");
 					current = current.down;
 				}
 				//else{
 				//	return current;
 				//}
-				System.out.println("Current node value: " + current.data);
+				//System.out.println("Current node value: " + current.data);
 			}
 			else if (current.down == null) {
 				// down is null, meaning not a prefix
 				break;
 			}
 			else if ((current.data != prefix[i]) && (current.next != null)) {
-				System.out.println("Not equal to each other");
-				System.out.println("Current node value: " + current.data);
-				System.out.println("Moving next...");
+				//System.out.println("Not equal to each other");
+				//System.out.println("Current node value: " + current.data);
+				//System.out.println("Moving next...");
 				current = current.next;
 				i--;
-				System.out.println("Current node value: " + current.data);
+				//System.out.println("Current node value: " + current.data);
 	
 			}
 			else if ((current.data !=prefix[i]) && (current.next == null)) {
-				System.out.println("The prefix at index does not equal the current node data, and next is null");
+				//System.out.println("The prefix at index does not equal the current node data, and next is null");
 				//if doesn't exist, go to next and point it to a null node
 				try {
 					current = current.next;
 				}catch (NullPointerException e){
-					System.out.println("No suggestions");
+					//System.out.println("No suggestions");
 					break;
 				}
 			}
@@ -259,17 +252,17 @@ public class LinkedList {
 	
 	//does the node 
 	private boolean hasCarrot(Node curr) {
-		System.out.println("In hasCarrot...");
+		//System.out.println("In hasCarrot...");
 		if (curr.data == '^') {
-			System.out.println("In carrot, return true");
+			//System.out.println("In carrot, return true");
 			return true;
 		}
 		else if (curr.next != null) {
-			System.out.println("In hasCarrot but looking next nodes to see if there is carrot");
+			//System.out.println("In hasCarrot but looking next nodes to see if there is carrot");
 			return hasCarrot(curr.next);
 		}
 		else {
-			System.out.println("returns false");
+			//System.out.println("returns false");
 			return false;
 		}
 	}

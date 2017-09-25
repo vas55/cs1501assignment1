@@ -52,10 +52,7 @@ public class DLB {
 		}else {
 			dictLL.search(userInput, n.down, w, index);
 		}
-		
-		String postfix = dictLL.returnSuggestions();
-		//System.out.println(userInput + postfix);
-		
+
 		String[] wordList = dictLL.returnWordList();
 		for (int i=0; i<wordList.length; i++) {
 			try {
