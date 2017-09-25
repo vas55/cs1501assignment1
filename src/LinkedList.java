@@ -66,7 +66,7 @@ public class LinkedList {
 					//System.out.println("characters equal each other and down node is null");
 					if (i == chars.length-1){
 						//insert flag under current word
-						System.out.println("Inputting flag...");
+						//System.out.println("Inputting flag...");
 						Node d = new Node ('^');
 						current.down = d;
 					}
@@ -123,7 +123,7 @@ public class LinkedList {
 	// *******************************************************
 	//WordList array
 	//capable of storing more than 5 words because there's a chance the word matches the user input so we need to move on to the next name
-	String[] WL = new String[100];
+	String[] WL = new String[10000];
 	int openIndex = 0;
 	
 	public String[] returnWordList() {
@@ -154,7 +154,14 @@ public class LinkedList {
 			//System.out.println("WL[openIndex]: " + wordList + " at openIndex: " + i);
 		}
 		//System.out.println("---------------------------------------------------");
-		
+		//System.out.println("Node we're at n: " + n);
+		/*if (n.data == '^') {
+			char c = n.data;
+			String s = Character.toString(c);
+			WL[openIndex] = s;
+			openIndex++;
+		}
+		*/
 		if (n.data != '^' && hasCarrot(n.down) && checkWordList(WL, openIndex, w)) {
 			//System.out.println("Has carrot and adding to word list");
 			//System.out.println("Before inputting data into w array");
@@ -208,7 +215,10 @@ public class LinkedList {
 		for (int i = 0; i<prefix.length; i++) {
 			//System.out.println("Comparing current.data: "+ current.data + " to prefix["+ i + "]: " + prefix[i]);
 			//System.out.println(current.data == prefix[i]);
-			if (current.data == prefix[i]) {
+			if (current == null) {
+				break;
+			}
+			else if (current.data == prefix[i]) {
 				//move down to see if it continues to be a prefix
 				if (i == prefix.length-1){
 					return current;
@@ -223,10 +233,10 @@ public class LinkedList {
 				//}
 				//System.out.println("Current node value: " + current.data);
 			}
-			else if (current.down == null) {
+			//else if (current.down == null) {
 				// down is null, meaning not a prefix
-				break;
-			}
+			//	break;
+			//}
 			else if ((current.data != prefix[i]) && (current.next != null)) {
 				//System.out.println("Not equal to each other");
 				//System.out.println("Current node value: " + current.data);
@@ -242,7 +252,7 @@ public class LinkedList {
 				try {
 					current = current.next;
 				}catch (NullPointerException e){
-					//System.out.println("No suggestions");
+					System.out.println("No suggestions 2");
 					break;
 				}
 			}

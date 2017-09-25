@@ -7,33 +7,36 @@ public class DLB {
 		long sumOfTime = 0; 
 		String nextLetter = "";
 		LinkedList dictLL = new LinkedList();
-
+		LinkedList userDLB = new LinkedList();
+		
 		// create dictionary DLB and user DLB
 		System.out.println("Started scanning dictionary file");
-		Scanner dictionary = new Scanner(new File("sample.txt"));
+		Scanner dictionary = new Scanner(new File("dictionary.txt"));
 		String firstWord = dictionary.nextLine();
-		System.out.println("Enter first word: " + firstWord);
+		//System.out.println("Enter first word: " + firstWord);
 		dictLL.addFirstWord(firstWord.toLowerCase());
-		System.out.println("entered first word");
+		//System.out.println("entered first word");
 		while (dictionary.hasNext()){
 			String dictionaryWord = dictionary.nextLine();
-			System.out.println("Adding next word...");
-			System.out.println("Word being input...: " + dictionaryWord);
+			//System.out.println("Adding next word...");
+			//System.out.println("Word being input...: " + dictionaryWord);
 			
 			dictLL.add(dictionaryWord.toLowerCase());
 		}
 		
 		dictionary.close();
-		System.out.println("Done inputting!");
+		System.out.println("Done inputting dictionary!");
 		
 		
 		// create DLB for user_history
 		Scanner userHistory = new Scanner(new File("user_history.txt"));
 		while (userHistory.hasNext()) {
 			String userWord = userHistory.nextLine();
+			userDLB.add(userWord.toLowerCase());
 		}
 		userHistory.close();
-		
+		System.out.println("Done inputting user_history!");
+
 		System.out.println("Enter your character: ");
 		Scanner sc = new Scanner(System.in);
 		String userInput = sc.next().toLowerCase();
@@ -53,20 +56,28 @@ public class DLB {
 			dictLL.search(userInput, n.down, w, index);
 		}
 
+		int count = 0;
 		String[] wordList = dictLL.returnWordList();
 		for (int i=0; i<wordList.length; i++) {
-			try {
-				if (wordList[i] == null) {
-					break;
+			if (count < 5){
+				try {
+					if (wordList[i] == null) {
+						break;
+					}
+					else {
+						String outputSuggestion = wordList[i].replaceAll("\0", "");
+						System.out.println(userInput + outputSuggestion);
+						count++;
+					}
+				}catch (NullPointerException e) {
+					System.out.println("");
 				}
-				else {
-					System.out.println(userInput + wordList[i].replaceAll("\0", ""));
-				}
-			}catch (NullPointerException e) {
-				System.out.println("");
+			}
+			else {
+				break;
 			}
 		}
-		
+		System.out.println("Done running...");
 		//create DLB for user
 		//userDLB();
 		//dictionaryDLB();
