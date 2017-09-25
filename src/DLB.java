@@ -39,6 +39,7 @@ public class DLB {
 		while (userHistory.hasNext()) {
 			String userWord = userHistory.nextLine();
 			userDLB.add(userWord.toLowerCase());
+			userInput = userInput.replace("$", "");
 			if (userWord.startsWith(userInput)) {
 				System.out.println(userWord);
 			}
@@ -55,8 +56,8 @@ public class DLB {
 		
 		//System.out.println("userInput=" + userInput);
 		if (userInput.contains("$")) {
-			userInput = userInput.replace("$", "");
 			System.out.println("End of word");
+			System.out.println("userInput = " + userInput);
 			enterPrefixIntoUserApproach(userInput);
 			
 		}
@@ -71,7 +72,7 @@ public class DLB {
 			if (n == null) {
 				//System.out.println("No suggestions");
 				//add to user history directly
-				//DO THIS STILL
+				//done above
 			}else {
 				dictLL.search(userInput, n.down, w, index);
 			}
