@@ -3,6 +3,9 @@ import java.io.*;
 
 public class ac_test {
 	
+	static FileWriter fw = null;
+	static BufferedWriter bw = null;
+	
 	public static void main(String[] args) throws IOException {
 		long sumOfTime = 0; 
 		String nextLetter = "";
@@ -34,13 +37,13 @@ public class ac_test {
 		String userInput = sc.nextLine().toLowerCase();
 		
 		// create DLB for user_history
-		System.out.println("Printing user_history file if prefix matches...");
+		//System.out.println("Printing user_history file if prefix matches...");
 		Scanner userHistory = new Scanner(new File("user_history.txt"));
 		while (userHistory.hasNext()) {
 			String userWord = userHistory.nextLine();
 			userDLB.add(userWord.toLowerCase());
-			userInput = userInput.replace("$", "");
-			if (userWord.startsWith(userInput)) {
+			String userInputWithoutMoney = userInput.replace("$", "");
+			if (userWord.startsWith(userInputWithoutMoney)) {
 				System.out.println(userWord);
 			}
 		}
@@ -62,14 +65,13 @@ public class ac_test {
 			
 		}
 		
-		if (userInput.contains("!")){
+		else if (userInput.contains("!")){
 			System.out.println("End of program. Bye");
 		}
 		else {
 			Node n = dictLL.reachLastNodeInPrefix(userInput);
 			//using one down node from prefix
 			//need to keep track of WordLIst index 
-			//if no suggestions
 			if (n == null) {
 				System.out.println("No suggestions");
 				enterPrefixIntoUserApproach(userInput);
@@ -111,57 +113,17 @@ public class ac_test {
 	
 	public static void enterPrefixIntoUserApproach(String word) throws IOException{
 		//the word will have a $ at the end because that's the last input
-		FileWriter fw = null;
-		BufferedWriter bw = null;
-		
+		word = word.replace("$", "");
+
 		fw = new FileWriter("user_history.txt", true);
 		bw = new BufferedWriter(fw);
-		Scanner scUser = new Scanner("user_history.txt");
-		while (scUser.hasNextLine()) {
-			String line = scUser.nextLine();
-			if (line == word) {
-				System.out.println("Word already exists in user_history.txt");
-			}
-			else {
+	
 				bw.write(word);
 				bw.newLine();
 				System.out.println("Entered letter into user history");
 				bw.close();
-			}
-		}
-		scUser.close();
+			
+		
 	}
 	
-	public static void userInput () throws IOException {
-		Scanner sc = new Scanner(System.in);
-		
-		FileWriter fw = null;
-		BufferedWriter bw = null;
-		System.out.println("Enter your character: ");
-		String letter = sc.next();
-		System.out.println("Letter equals = " + letter);
-		/*if (letter.length() > 1 || letter.length() == 0) {
-			System.out.println("Please enter one character at a time");
-		}
-		else */
-		if (letter == "$") {
-			System.out.println("Bye");
-			bw.close();
-			return;
-		}
-		//if end of word then put new line in document and close
-		else if (letter == "!"){
-			bw.newLine();
-			bw.close();
-			System.out.println("End of word");
-		}
-		else {
-			fw = new FileWriter("user_history.txt");
-			bw = new BufferedWriter(fw);
-			bw.write(letter);
-			System.out.println("Entered letter into user history");
-		}
-		
-	}
-
 }
